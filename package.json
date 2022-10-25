@@ -1,0 +1,65 @@
+{
+    "name": "gatekeeper-client-sdk",
+    "version": "0.4.3-dev.2",
+    "main": "index.js",
+    "repository": "git@github.com:ProFabric/gatekeeper-client-sdk.git",
+    "author": "Erdi Kose <me@erdkse.com>",
+    "license": "MIT",
+    "types": "./**/*.d.ts",
+    "scripts": {
+        "start": "node build/index.js",
+        "clean": "rimraf coverage build tmp",
+        "prebuild": "npm run lint",
+        "build": "rm -rf build && tsc --declaration -p tsconfig.release.json && cat ./package.json | grep -v '\"private\":' > build/package.json",
+        "build:watch": "rm -rf build && tsc -w -p tsconfig.release.json",
+        "lint": "eslint . --ext .ts,.tsx",
+        "test": "jest --coverage",
+        "test:watch": "jest --watch",
+        "docs": "typedoc index.ts --name \"Sample SDK\" --includeVersion",
+        "release:patch": "standard-version --release-as patch --prerelease dev",
+        "release:minor": "standard-version --release-as minor",
+        "release:major": "standard-version --release-as major"
+    },
+    "lint-staged": {
+        "**/*.js": [
+            "eslint --fix",
+            "prettier-eslint --write"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "dependencies": {
+        "@fingerprintjs/fingerprintjs": "3.3.0",
+        "dotenv": "^10.0.0",
+        "js-base64": "^3.7.2",
+        "node-fetch": "3.0.0",
+        "tslib": "2.3.1"
+    },
+    "devDependencies": {
+        "@types/jest": "27.0.2",
+        "@types/node": "16.11.3",
+        "@typescript-eslint/eslint-plugin": "5.1.0",
+        "@typescript-eslint/parser": "5.1.0",
+        "eslint": "7.32.0",
+        "eslint-config-airbnb-base": "14.2.1",
+        "eslint-config-prettier": "8.3.0",
+        "eslint-plugin-import": "2.24.2",
+        "eslint-plugin-jest": "25.2.2",
+        "eslint-plugin-prettier": "4.0.0",
+        "husky": "7.0.2",
+        "jest": "27.3.1",
+        "lint-staged": "11.1.2",
+        "prettier": "2.4.0",
+        "prettier-eslint": "13.0.0",
+        "prettier-eslint-cli": "5.0.1",
+        "rimraf": "3.0.2",
+        "standard-version": "9.3.1",
+        "ts-jest": "27.0.7",
+        "tsutils": "3.21.0",
+        "typedoc": "0.22.6",
+        "typescript": "4.4.4"
+    }
+}

@@ -1,0 +1,29 @@
+declare class Gatekeeper {
+    private readonly LOCALSTORAGE_IDENTIFIER;
+    private readonly URL;
+    private static instance;
+    private tab;
+    private payload;
+    constructor();
+    isLoggedIn(): boolean;
+    getToken(): string;
+    getAccountID(): string;
+    getDeviceID(): string;
+    private getBase64Payload;
+    static getInstance(): Gatekeeper;
+    initialize(accountID: string): void;
+    loginByAuth(email: string, password: string): Promise<any>;
+    loginByIdms(email: string, password: string, serviceid: string): Promise<any>;
+    registerByAuth(email: string, password: string): Promise<any>;
+    loginByGoogle(): Promise<string>;
+    loginBy365(serviceid: string): Promise<string>;
+    registerByGoogle(): Promise<string>;
+    loginByFacebook(): Promise<string>;
+    registerByFacebook(): Promise<string>;
+    logout(): Promise<any>;
+    getProfile(): Promise<any>;
+    getProfileDevices(): Promise<any>;
+    getProfileSessions(): Promise<any>;
+}
+declare const _default: Gatekeeper;
+export default _default;
