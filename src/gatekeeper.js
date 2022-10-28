@@ -82,6 +82,7 @@ class Gatekeeper {
                 });
                 console.log(response);
                 const data = yield response.json();
+                console.log(data);
                 if (data && data.status && data.message) {
                     throw new Error(data.message);
                 }
