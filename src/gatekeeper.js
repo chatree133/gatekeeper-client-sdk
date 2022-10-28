@@ -6,8 +6,8 @@ const js_base64_1 = require("js-base64");
 const fingerprintjs_1 = require("@fingerprintjs/fingerprintjs");
 class Gatekeeper {
     constructor() {
-        this.LOCALSTORAGE_IDENTIFIER = 'gatekeeper_token';
-        this.URL = 'https://api-passport.advanceagro.net';
+        this.LOCALSTORAGE_IDENTIFIER = "gatekeeper_token";
+        this.URL = "https://api-passport.advanceagro.net";
         this.tab = new tab_1.Tab();
     }
     isLoggedIn() {
@@ -24,7 +24,7 @@ class Gatekeeper {
     }
     getBase64Payload(additional) {
         const data = Object.assign(Object.assign({}, this.payload), additional);
-        console.log('payload', data);
+        console.log("payload", data);
         return (0, js_base64_1.encode)(JSON.stringify(data));
     }
     static getInstance() {
@@ -40,7 +40,8 @@ class Gatekeeper {
             clientURL: `${location.protocol}//${location.host}/login`,
             deviceID: null,
         };
-        fingerprintjs_1.default.load()
+        fingerprintjs_1.default
+            .load()
             .then((fp) => fp.get())
             .then(({ visitorId }) => (this.payload.deviceID = visitorId));
     }
@@ -50,13 +51,18 @@ class Gatekeeper {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
                 // const { token } = yield this.tab.open(`${this.URL}/oauth/aad/signin?serviceid=${serviceid}`);
-                const { token } = yield this.tab.open(`${this.URL}/oauth/aad/signin?serviceid=${serviceid}&payload=${this.getBase64Payload({
-                    type: 'LOGIN',
-                })}`);
+                const { token } = yield this.tab.open(
+                    `${
+                        this.URL
+                    }/oauth/aad/signin?serviceid=${serviceid}&payload=${this.getBase64Payload(
+                        {
+                            type: "LOGIN",
+                        }
+                    )}`
+                );
                 localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, token);
                 return token;
-            }
-            catch (error) {
+            } catch (error) {
                 console.log(error);
                 throw error;
             }
@@ -68,20 +74,20 @@ class Gatekeeper {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
                 const response = yield fetch(`${this.URL}/oauth/idms/signin`, {
-                    method: 'POST',
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json",
                     },
                     body: JSON.stringify({ email, password, serviceid }),
                 });
+                console.log(response);
                 const data = yield response.json();
                 if (data && data.status && data.message) {
                     throw new Error(data.message);
                 }
                 localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, data.token);
                 return data.token;
-            }
-            catch (error) {
+            } catch (error) {
                 console.log(error);
                 throw error;
             }
@@ -92,9 +98,9 @@ class Gatekeeper {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
                 const response = yield fetch(`${this.URL}/v1/auth/login`, {
-                    method: 'POST',
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json",
                         AccountID: this.payload.accountID,
                         DeviceID: this.payload.deviceID,
                     },
@@ -106,8 +112,7 @@ class Gatekeeper {
                 }
                 localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, data.token);
                 return data.token;
-            }
-            catch (error) {
+            } catch (error) {
                 console.log(error);
                 throw error;
             }
@@ -117,9 +122,9 @@ class Gatekeeper {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
                 const response = yield fetch(`${this.URL}/v1/auth/register`, {
-                    method: 'POST',
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json",
                         AccountID: this.payload.accountID,
                         DeviceID: this.payload.deviceID,
                     },
@@ -131,8 +136,7 @@ class Gatekeeper {
                 }
                 localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, data.token);
                 return data.token;
-            }
-            catch (error) {
+            } catch (error) {
                 console.log(error);
                 throw error;
             }
@@ -141,13 +145,16 @@ class Gatekeeper {
     loginByGoogle() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
-                const { token } = yield this.tab.open(`${this.URL}/v1/auth/google?payload=${this.getBase64Payload({
-                    type: 'LOGIN',
-                })}`);
+                const { token } = yield this.tab.open(
+                    `${this.URL}/v1/auth/google?payload=${this.getBase64Payload(
+                        {
+                            type: "LOGIN",
+                        }
+                    )}`
+                );
                 localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, token);
                 return token;
-            }
-            catch (error) {
+            } catch (error) {
                 console.log(error);
                 throw error;
             }
@@ -156,13 +163,16 @@ class Gatekeeper {
     registerByGoogle() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
-                const { token } = yield this.tab.open(`${this.URL}/v1/auth/google?payload=${this.getBase64Payload({
-                    type: 'REGISTER',
-                })}`);
+                const { token } = yield this.tab.open(
+                    `${this.URL}/v1/auth/google?payload=${this.getBase64Payload(
+                        {
+                            type: "REGISTER",
+                        }
+                    )}`
+                );
                 localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, token);
                 return token;
-            }
-            catch (error) {
+            } catch (error) {
                 console.log(error);
                 throw error;
             }
@@ -171,13 +181,16 @@ class Gatekeeper {
     loginByFacebook() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
-                const { token } = yield this.tab.open(`${this.URL}/v1/auth/facebook?payload=${this.getBase64Payload({
-                    type: 'LOGIN',
-                })}`);
+                const { token } = yield this.tab.open(
+                    `${
+                        this.URL
+                    }/v1/auth/facebook?payload=${this.getBase64Payload({
+                        type: "LOGIN",
+                    })}`
+                );
                 localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, token);
                 return token;
-            }
-            catch (error) {
+            } catch (error) {
                 console.log(error);
                 throw error;
             }
@@ -186,13 +199,16 @@ class Gatekeeper {
     registerByFacebook() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
-                const { token } = yield this.tab.open(`${this.URL}/v1/auth/facebook?payload=${this.getBase64Payload({
-                    type: 'REGISTER',
-                })}`);
+                const { token } = yield this.tab.open(
+                    `${
+                        this.URL
+                    }/v1/auth/facebook?payload=${this.getBase64Payload({
+                        type: "REGISTER",
+                    })}`
+                );
                 localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, token);
                 return token;
-            }
-            catch (error) {
+            } catch (error) {
                 console.log(error);
                 throw error;
             }
@@ -201,12 +217,12 @@ class Gatekeeper {
     logout() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             if (!this.isLoggedIn) {
-                throw new Error('Uer not logged in');
+                throw new Error("Uer not logged in");
             }
             const token = localStorage.getItem(this.LOCALSTORAGE_IDENTIFIER);
             const response = yield fetch(`${this.URL}/v1/profile/logout`, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                     AccountID: this.payload.accountID,
                     DeviceID: this.payload.deviceID,
                     Authorization: `Bearer ${token}`,
@@ -223,12 +239,12 @@ class Gatekeeper {
     getProfile() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             if (!this.isLoggedIn) {
-                throw new Error('Uer not logged in');
+                throw new Error("Uer not logged in");
             }
             const token = localStorage.getItem(this.LOCALSTORAGE_IDENTIFIER);
             const response = yield fetch(`${this.URL}/v1/profile`, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                     AccountID: this.payload.accountID,
                     DeviceID: this.payload.deviceID,
                     Authorization: `Bearer ${token}`,
@@ -244,12 +260,12 @@ class Gatekeeper {
     getProfileDevices() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             if (!this.isLoggedIn) {
-                throw new Error('Uer not logged in');
+                throw new Error("Uer not logged in");
             }
             const token = localStorage.getItem(this.LOCALSTORAGE_IDENTIFIER);
             const response = yield fetch(`${this.URL}/v1/profile/devices`, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                     AccountID: this.payload.accountID,
                     DeviceID: this.payload.deviceID,
                     Authorization: `Bearer ${token}`,
@@ -265,12 +281,12 @@ class Gatekeeper {
     getProfileSessions() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             if (!this.isLoggedIn) {
-                throw new Error('Uer not logged in');
+                throw new Error("Uer not logged in");
             }
             const token = localStorage.getItem(this.LOCALSTORAGE_IDENTIFIER);
             const response = yield fetch(`${this.URL}/v1/profile/sessions`, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                     AccountID: this.payload.accountID,
                     DeviceID: this.payload.deviceID,
                     Authorization: `Bearer ${token}`,
