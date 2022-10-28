@@ -37,7 +37,7 @@ class Gatekeeper {
         this.payload = {
             isBrowser: true,
             accountID,
-            clientURL: `${location.protocol}//${location.host}`,
+            clientURL: `${location.protocol}//${location.host}/login`,
             deviceID: null,
         };
         fingerprintjs_1.default.load()
