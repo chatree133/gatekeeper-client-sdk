@@ -71,9 +71,6 @@ class Gatekeeper {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        AccountID: this.payload.accountID,
-                        DeviceID: this.payload.deviceID,
-                        'Access-Control-Allow-Origin': 'http://localhost:3000'
                     },
                     body: JSON.stringify({ email, password, serviceid }),
                 });
