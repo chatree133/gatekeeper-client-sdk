@@ -56,12 +56,7 @@ class Tab {
         }
         let params;
         try {
-            console.log('json', '{"' +
-            decodeURI(this.window.location.search.substring(1))
-                .replace(/"/g, '\\"')
-                .replace(/&/g, '","')
-                .replace(/=/g, '":"') +
-            '"}');
+            console.log('json', this.window.location.href);
             params = JSON.parse('{"' +
                 decodeURI(this.window.location.search.substring(1))
                     .replace(/"/g, '\\"')
