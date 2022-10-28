@@ -84,6 +84,7 @@ class Gatekeeper {
                 const data = yield response.json();
                 console.log(data);
                 if (data && data.status && data.message) {
+                    console.log(data.message);
                     throw new Error(data.message);
                 }
                 localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, data.token);
