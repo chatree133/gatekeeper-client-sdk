@@ -67,7 +67,7 @@ class Gatekeeper {
     loginByIdms(email, password, serviceid) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
-                const response = yield fetch(`${this.URL}/oauth/signin`, {
+                const response = yield fetch(`${this.URL}/oauth/idms/signin`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
