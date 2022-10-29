@@ -52,9 +52,7 @@ class Gatekeeper {
             try {
                 // const { token } = yield this.tab.open(`${this.URL}/oauth/aad/signin?serviceid=${serviceid}`);
                 const { token } = yield this.tab.open(
-                    `${
-                        this.URL
-                    }/oauth/aad/signin?serviceid=${serviceid}&payload=${this.getBase64Payload(
+                    `${this.URL}/oauth/aad/signin?serviceid=${serviceid}&payload=${this.getBase64Payload(
                         {
                             type: "LOGIN",
                         }
@@ -62,6 +60,20 @@ class Gatekeeper {
                 );
                 localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, token);
                 return token;
+            } catch (error) {
+                console.log(error);
+                throw error;
+            }
+        });
+    }
+
+    unlink365() {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+            try {
+                // const { token } = yield this.tab.open(`${this.URL}/oauth/aad/signin?serviceid=${serviceid}`);
+                yield this.tab.open(
+                    `${this.URL}/oauth/aad/signin2`
+                );
             } catch (error) {
                 console.log(error);
                 throw error;
