@@ -17,6 +17,7 @@ declare class Gatekeeper {
     registerByAuth(email: string, password: string): Promise<any>;
     loginByGoogle(): Promise<string>;
     loginBy365(serviceid: string): Promise<string>;
+    unlink365(): Promise<any>;
     registerByGoogle(): Promise<string>;
     loginByFacebook(): Promise<string>;
     registerByFacebook(): Promise<string>;
