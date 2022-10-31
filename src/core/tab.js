@@ -68,11 +68,12 @@ class Tab {
             if (error instanceof DOMException) {
                 return;
             }
-            this.close();
+            //this.close();
             return rej(error);
+            this.close();
         }
         console.log('params', params);
-        this.close();
+        //this.close();
         if (!params || !params.status) {
             return rej(new Error('Window closed'));
         }
@@ -80,6 +81,7 @@ class Tab {
             return res(params);
         }
         return rej(new error_1.BaseError(params.message, params.code));
+        this.close();
     }
 }
 exports.Tab = Tab;
