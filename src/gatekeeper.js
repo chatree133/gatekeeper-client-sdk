@@ -68,29 +68,35 @@ class Gatekeeper {
     }
 
     unlink365() {
-        return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-            try {
-                yield this.tab.open2(
-                    `${this.URL}/oauth/aad/signin2`
-                );
-            } catch (error) {
-                console.log(error);
-                throw error;
-            }
-        });
+        this.tab.open2(
+            `${this.URL}/oauth/aad/signin2`
+        );
+        // return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+        //     try {
+        //         yield this.tab.open2(
+        //             `${this.URL}/oauth/aad/signin2`
+        //         );
+        //     } catch (error) {
+        //         console.log(error);
+        //         throw error;
+        //     }
+        // });
     }
 
     manage365() {
-        return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-            try {
-                yield this.tab.open2(
-                    `${this.URL}/oauth/aad/signin3`
-                );
-            } catch (error) {
-                console.log(error);
-                throw error;
-            }
-        });
+        this.tab.open2(
+            `${this.URL}/oauth/aad/signin3`
+        );
+        // return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+        //     try {
+        //         yield this.tab.open2(
+        //             `${this.URL}/oauth/aad/signin3`
+        //         );
+        //     } catch (error) {
+        //         console.log(error);
+        //         throw error;
+        //     }
+        // });
     }
 
     //https://api-passport.advanceagro.net/oauth/idms/signin
