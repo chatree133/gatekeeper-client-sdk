@@ -70,9 +70,21 @@ class Gatekeeper {
     unlink365() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
-                // const { token } = yield this.tab.open(`${this.URL}/oauth/aad/signin?serviceid=${serviceid}`);
                 yield this.tab.open(
                     `${this.URL}/oauth/aad/signin2`
+                );
+            } catch (error) {
+                console.log(error);
+                throw error;
+            }
+        });
+    }
+
+    manage365() {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+            try {
+                yield this.tab.open(
+                    `${this.URL}/oauth/aad/signin3`
                 );
             } catch (error) {
                 console.log(error);
