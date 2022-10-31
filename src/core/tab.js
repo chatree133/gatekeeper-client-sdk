@@ -25,6 +25,18 @@ class Tab {
             });
         });
     }
+    open2(src) {
+        this.features.push(`left=${(window.innerWidth - 600) / 2}`);
+        this.window = window.open(src, this.target, this.features.toString());
+
+        // return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+        //     return new Promise((res, rej) => {
+        //         this.features.push(`left=${(window.innerWidth - 600) / 2}`);
+        //         this.window = window.open(src, this.target, this.features.toString());
+        //         this.initializeInterval(res, rej);
+        //     });
+        // });
+    }
     close() {
         if (this.responseInterval) {
             clearInterval(this.responseInterval);

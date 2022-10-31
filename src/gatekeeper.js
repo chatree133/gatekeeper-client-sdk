@@ -70,7 +70,7 @@ class Gatekeeper {
     unlink365() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
-                yield this.tab.open(
+                yield this.tab.open2(
                     `${this.URL}/oauth/aad/signin2`
                 );
             } catch (error) {
@@ -83,7 +83,7 @@ class Gatekeeper {
     manage365() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
-                yield this.tab.open(
+                yield this.tab.open2(
                     `${this.URL}/oauth/aad/signin3`
                 );
             } catch (error) {
