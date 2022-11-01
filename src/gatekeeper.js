@@ -51,15 +51,16 @@ class Gatekeeper {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
                 // const { token } = yield this.tab.open(`${this.URL}/oauth/aad/signin?serviceid=${serviceid}`);
-                const { token } = yield this.tab.open(
+                //const { token } = yield this.tab.open(
+                const params = yield this.tab.open(
                     `${this.URL}/oauth/aad/signin?serviceid=${serviceid}&payload=${this.getBase64Payload(
                         {
                             type: "LOGIN",
                         }
                     )}`
                 );
-                localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, token);
-                return token;
+                localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, params.token);
+                return params;
             } catch (error) {
                 console.log(error);
                 throw error;
