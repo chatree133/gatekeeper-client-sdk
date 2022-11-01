@@ -119,7 +119,7 @@ class Gatekeeper {
                     throw new Error(data.message);
                 }
                 localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, data.token);
-                return data.token;
+                return data;
             } catch (error) {
                 console.log(error);
                 throw error;
