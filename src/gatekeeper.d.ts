@@ -16,7 +16,7 @@ declare class Gatekeeper {
     loginByIdms(email: string, password: string, serviceid: string): Promise<any>;
     registerByAuth(email: string, password: string): Promise<any>;
     loginByGoogle(): Promise<string>;
-    loginBy365(serviceid: string): Promise<string>;
+    loginBy365(serviceid: string): Promise<any>;
     unlink365(): Promise<any>;
     manage365(): Promise<any>;
     registerByGoogle(): Promise<string>;
