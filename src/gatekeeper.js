@@ -50,8 +50,6 @@ class Gatekeeper {
     loginBy365(serviceid) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
-                // const { token } = yield this.tab.open(`${this.URL}/oauth/aad/signin?serviceid=${serviceid}`);
-                //const { token } = yield this.tab.open(
                 const params = yield this.tab.open(
                     `${this.URL}/oauth/aad/signin?serviceid=${serviceid}&payload=${this.getBase64Payload(
                         {
@@ -72,32 +70,12 @@ class Gatekeeper {
         this.tab.open2(
             `${this.URL}/oauth/aad/signin2`
         );
-        // return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-        //     try {
-        //         yield this.tab.open2(
-        //             `${this.URL}/oauth/aad/signin2`
-        //         );
-        //     } catch (error) {
-        //         console.log(error);
-        //         throw error;
-        //     }
-        // });
     }
 
     manage365() {
         this.tab.open2(
             `${this.URL}/oauth/aad/signin3`
         );
-        // return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-        //     try {
-        //         yield this.tab.open2(
-        //             `${this.URL}/oauth/aad/signin3`
-        //         );
-        //     } catch (error) {
-        //         console.log(error);
-        //         throw error;
-        //     }
-        // });
     }
 
     //https://api-passport.advanceagro.net/oauth/idms/signin
@@ -111,17 +89,14 @@ class Gatekeeper {
                     },
                     body: JSON.stringify({ email, password, serviceid }),
                 });
-                console.log(response);
                 const data = yield response.json();
                 console.log(data);
                 if (data && data.status && data.message) {
-                    console.log(data.message);
                     throw new Error(data.message);
                 }
                 localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, data.token);
                 return data;
             } catch (error) {
-                console.log(error);
                 throw error;
             }
         });
@@ -269,21 +244,21 @@ class Gatekeeper {
             return data;
         });
     }
+    //https://api-passport.advanceagro.net/me
     getProfile() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             if (!this.isLoggedIn) {
                 throw new Error("Uer not logged in");
             }
             const token = localStorage.getItem(this.LOCALSTORAGE_IDENTIFIER);
-            const response = yield fetch(`${this.URL}/v1/profile`, {
+            const response = yield fetch(`${this.URL}/me`, {
                 headers: {
                     "Content-Type": "application/json",
-                    AccountID: this.payload.accountID,
-                    DeviceID: this.payload.deviceID,
                     Authorization: `Bearer ${token}`,
                 },
             });
             const data = yield response.json();
+            console.log(data);
             if (data && data.status && data.message) {
                 throw new Error(data.message);
             }
