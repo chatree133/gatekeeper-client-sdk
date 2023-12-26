@@ -47,17 +47,22 @@ class Gatekeeper {
     }
 
     //https://api-passport.advanceagro.net/oauth/aad/signin?serviceid=0000
-    loginBy365(serviceid) {
+    loginBy365(serviceid, state) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
                 const params = yield this.tab.open(
-                    `${this.URL}/oauth/aad/signin?serviceid=${serviceid}&payload=${this.getBase64Payload(
+                    `${
+                        this.URL
+                    }/oauth/aad/signin?serviceid=${serviceid}&state=${state}&payload=${this.getBase64Payload(
                         {
                             type: "LOGIN",
                         }
                     )}`
                 );
-                localStorage.setItem(this.LOCALSTORAGE_IDENTIFIER, params.token);
+                localStorage.setItem(
+                    this.LOCALSTORAGE_IDENTIFIER,
+                    params.token
+                );
                 return params;
             } catch (error) {
                 console.log(error);
@@ -67,19 +72,15 @@ class Gatekeeper {
     }
 
     unlink365() {
-        this.tab.open2(
-            `${this.URL}/oauth/aad/signin2`
-        );
+        this.tab.open2(`${this.URL}/oauth/aad/signin2`);
     }
 
     manage365() {
-        this.tab.open2(
-            `${this.URL}/oauth/aad/signin3`
-        );
+        this.tab.open2(`${this.URL}/oauth/aad/signin3`);
     }
 
     //https://api-passport.advanceagro.net/oauth/idms/signin
-    loginByIdms(email, password, serviceid) {
+    loginByIdms(email, password, serviceid, state) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
                 const response = yield fetch(`${this.URL}/oauth/idms/signin`, {
@@ -87,7 +88,7 @@ class Gatekeeper {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ email, password, serviceid }),
+                    body: JSON.stringify({ email, password, serviceid, state }),
                 });
                 const data = yield response.json();
                 console.log(data);
