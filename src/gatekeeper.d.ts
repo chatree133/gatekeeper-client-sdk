@@ -13,11 +13,11 @@ declare class Gatekeeper {
     static getInstance(): Gatekeeper;
     initialize(accountID: string): void;
     loginByAuth(email: string, password: string): Promise<any>;
-    loginByIdms(email: string, password: string, serviceid: string): Promise<any>;
+    loginByIdms(email: string, password: string, serviceid: string, state: string): Promise<any>;
     registerByAuth(email: string, password: string): Promise<any>;
     loginByGoogle(): Promise<string>;
-    loginBy365(serviceid: string): Promise<any>;
-    loginDealer(serviceid: string): Promise<any>;
+    loginBy365(serviceid: string, state: string): Promise<any>;
+    loginDealer(serviceid: string, state: string): Promise<any>;
     unlink365(): Promise<any>;
     manage365(): Promise<any>;
     registerByGoogle(): Promise<string>;
