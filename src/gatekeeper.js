@@ -71,6 +71,30 @@ class Gatekeeper {
         });
     }
 
+    loginDealer(serviceid, state) {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+            try {
+                const params = yield this.tab.open(
+                    `${
+                        this.URL
+                    }/oauth/aad/dealer?serviceid=${serviceid}&state=${state}&payload=${this.getBase64Payload(
+                        {
+                            type: "LOGIN",
+                        }
+                    )}`
+                );
+                localStorage.setItem(
+                    this.LOCALSTORAGE_IDENTIFIER,
+                    params.token
+                );
+                return params;
+            } catch (error) {
+                console.log(error);
+                throw error;
+            }
+        });
+    }
+
     unlink365() {
         this.tab.open2(`${this.URL}/oauth/aad/signin2`);
     }
