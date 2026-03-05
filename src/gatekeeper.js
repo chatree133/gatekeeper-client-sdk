@@ -47,13 +47,13 @@ class Gatekeeper {
     }
 
     //https://api-passport.advanceagro.net/oauth/aad/signin?serviceid=0000
-    loginBy365(serviceid, state) {
+    loginBy365(serviceid, state, deviceNo) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
                 const params = yield this.tab.open(
                     `${
                         this.URL
-                    }/oauth/aad/signin?serviceid=${serviceid}&state=${state}&payload=${this.getBase64Payload(
+                    }/oauth/aad/signin?serviceid=${serviceid}&state=${state}&deviceNo=${deviceNo}&payload=${this.getBase64Payload(
                         {
                             type: "LOGIN",
                         }
@@ -104,7 +104,7 @@ class Gatekeeper {
     }
 
     //https://api-passport.advanceagro.net/oauth/idms/signin
-    loginByIdms(email, password, serviceid, state) {
+    loginByIdms(email, password, serviceid, state, deviceNo) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             try {
                 const response = yield fetch(`${this.URL}/oauth/idms/signin`, {
@@ -112,7 +112,7 @@ class Gatekeeper {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ email, password, serviceid, state }),
+                    body: JSON.stringify({ email, password, serviceid, state, deviceNo }),
                 });
                 const data = yield response.json();
                 console.log(data);
